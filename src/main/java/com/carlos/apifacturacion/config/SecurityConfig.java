@@ -49,7 +49,7 @@ public class SecurityConfig {
         // Permite peticiones desde tu app en Vercel
         configuration.setAllowedOrigins(List.of(allowedOrigin, "https://app-facturacion-uq12.vercel.app"));
         // Permite todos los métodos HTTP principales
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("GET", "PATCH", "POST", "PUT", "DELETE", "OPTIONS"));
         // Permite todos los encabezados (Content-Type, Authorization, etc.)
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
