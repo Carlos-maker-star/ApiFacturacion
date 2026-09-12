@@ -30,15 +30,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                // Habilitar CORS con la configuración definida abajo
+                // Habilitar CORS para permitir peticiones desde Vercel
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                // Desactivar CSRF (necesario para APIs REST stateless)
+                // Desactivar CSRF para API REST
                 .csrf(AbstractHttpConfigurer::disable)
-                // Permitir peticiones preflight (OPTIONS) y la ruta de login sin autenticación
+                // Permitir acceso libre a TODOS los endpoints (sin JWT / autenticación)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/apiFA/users/login").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
